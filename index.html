@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>In Another Universe...</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      background: radial-gradient(circle at top, #1b0033, #0d0b1e);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #ffffff;
+      position: relative;
+    }
+
+    /* Twinkling stars */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    .container {
+      z-index: 1;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .line {
+      font-size: 1.8rem;
+      max-width: 90vw;
+      margin: auto;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .line.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <div class="line" id="lineDisplay">In another universe... you smiled at me first.</div>
+  </div>
+
+  <script>
+    // Generate 100 stars randomly
+    const starContainer = document.getElementById("stars");
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDuration = `${1.5 + Math.random() * 2}s`;
+      star.style.opacity = `${0.2 + Math.random() * 0.8}`;
+      starContainer.appendChild(star);
+    }
+
+    // Love lines
+    const lines = [
+      "In another universe... you smiled at me first.",
+      "In another universe... we met at a train station.",
+      "In another universe... I saw you in a coffee shop and I just knew.",
+      "In another universe... our parents were best friends, and so were we.",
+      "In another universe... I was the shy one and you made the first move.",
+      "In another universe... we were neighbors who kept falling for each other again and again.",
+      "In another universe... I wrote your name in every notebook before I knew why.",
+      "In another universe... we got married under the stars.",
+      "In another universe... we were soulmates who found each other without saying a word.",
+      "In another universe... you played guitar and sang me to sleep.",
+      "In another universe... you caught me staring and didn’t look away.",
+      "In another universe... we met in a dream and never woke up.",
+      "In every universe... it’s always you."
+    ];
+
+    let index = 0;
+    const lineEl = document.getElementById("lineDisplay");
+
+    function showNextLine() {
+      lineEl.classList.remove("show");
+      setTimeout(() => {
+        lineEl.textContent = lines[index];
+        lineEl.classList.add("show");
+        index = (index + 1) % lines.length;
+      }, 1000);
+    }
+
+    // Start loop
+    showNextLine(); // first line
+    setInterval(showNextLine, 5000); // change every 5 sec
+  </script>
+</body>
+</html>
